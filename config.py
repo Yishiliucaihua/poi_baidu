@@ -15,5 +15,7 @@ suffix_keyword = "_keyword.txt"
 suffix_poi = "_poi.txt"
 suffix_poi_lng_lat = "_poi_lng_lat.txt"
 suffix_poi_lng_lat_fin = "_poi_lng_lat_fin.txt"
+# determine the timeout of socket
 socket_timeout = 2
+# determine the download speed
 sleep_span = 0.05
