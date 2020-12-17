@@ -1,13 +1,15 @@
-# Baidu POI Downloader
+# Baidu POIs Downloader
+## Utility
+### find lots of POIs in specified city such as "chengdu" and "beijing"
 ## File Description
 ### config.py
 config file of downloading and data clean
 ### get_category.py
-download categories of POI of specified city
+download categories of POIs of specified city
 ### get_keyword.py
-download keywords of POI of specified city
+download keywords of POIs of specified city
 ### get_poi.py
-download POI of specified city
+download POIs of specified city
 ### convert_location.html
 convert projection coordination to baidu coordination
 ### poi_filter.py
@@ -25,4 +27,4 @@ with coordination transform tool in ./import_code) and remove POI that out of sp
 ### https://github.com/wandergis/coordTransform_py
 ### https://github.com/eligrey/FileSaver.js
 ## Limitation
-### POI dataset downloaded by this tool isn't very precise, it may only used in some interesting tests/demos, if you want to get the real POI dataset, you may use the API of baidu map SDK(http://lbsyun.baidu.com/index.php?title=webapi)
+### POIs dataset downloaded by this tool isn't very precise, it may only used in some interesting tests/demos, if you want to get the real POIs dataset, you may use the API of baidu map SDK(http://lbsyun.baidu.com/index.php?title=webapi)
