@@ -14,7 +14,7 @@ download POIs of specified city
 convert projection coordination to baidu coordination
 ### poi_filter.py
 convert baidu coordination to wgs-84(if you don't want to do this, you can change the corresponding code 
-with coordination transform tool in ./import_code) and remove POI that out of specified range
+with coordination transform tool in ./import_code) and remove POIs that out of specified range
 ## How To Use
 ### 1. adjust the config.py according to your purpose
 ### 2. run get_category.py
