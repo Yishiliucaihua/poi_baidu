@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>墨卡托坐标转经纬度坐标</title>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2" charset="utf-8"></script>
+<script type="text/javascript" src="./import_code/FileSaver.js" charset="utf-8"></script>
+</head>
+<body>
+<div style="display:none;" id="map"></div>
+<div style="float:left; margin:0 0 0 0px;">
+	<input type="file" id="fileChooser"/>
+	<p>file prefix: <input type="text" id=filePrefix></p>
+    <p><input type="button" value="convert" id="commit" onclick="process();" /></p>
+</div>
+</body>
+</html>
+
+<script type="text/javascript" charset="utf-8">
+
+var itemSize = 6;
+
+var map = new BMap.Map("map");
+function convertP2LL(x, y)
+{
+    return map.getMapType().getProjection().pointToLngLat(new BMap.Pixel(x, y));
+}
+
+function separate_combine(list)
+{
+    var ret = "";
+    for (var i = 0; i < list.length; ++i)
+    {
+        ret = ret + list[i];
+        if (i != list.length - 1)
+        {
+            ret = ret + "|";
+        }
+    }
+    return ret + "\n";
+}
+
+function process()
+{
+	var fp = document.getElementById("filePrefix").value;
+	if (fp.length == 0)
+	{
+		alert("please input download file name");
+		return;
+	}
+	downloadFileName = fp + "_poi_lng_lat.txt";
+	document.getElementById("commit").disabled = true;
+	var reader = new FileReader();
+    reader.onload = function()
+    {
+    	var lines = this.result.split("\n");
+    	console.log("total lines: " +　lines.length);
+
+        var content = ""
+    	for (var i = 0; i < lines.length; ++i)
+		{
+			line = lines[i];
+			items = line.split("|");
+			if (items.length == itemSize)
+			{
+                var list = new Array();
+				var s = convertP2LL(parseFloat(items[0]) / 100, parseFloat(items[1]) / 100);
+                list.push(s.lng);
+                list.push(s.lat);
+
+                for (var j = 2; j < itemSize; ++j)
+                {
+                    list.push(items[j]);
+                }
+
+                content += separate_combine(list);
+			}
+		}
+		
+        var file = new File([content], {type: "text/plain;charset=utf-8"});
+        saveAs(file, downloadFileName);
+
+    	document.getElementById("commit").disabled = false;
+    }
+
+    files = document.getElementById("fileChooser").files;
+    if (files.length > 0)
+    {
+    	reader.readAsText(files[0], "gbk");
+    }
+    else
+    {
+    	document.getElementById("commit").disabled = false;
+    }
+}
+</script>
